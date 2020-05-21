@@ -1,0 +1,20 @@
+<h1>Lista de Usuarios</h1>
+
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'users:add' %}" method="post">
+	<input type="text" name="user_name">
+	<button type="submit">add</button>
+	 {% csrf_token %}
+</form>
+
+<ul>
+{% for user in users%}
+<li>
+{{ user.id}}  :  {{ user.user_name }}
+<a href="{% url 'users:remove' user.id%}" >x</a>
+</li>
+{% endfor %}
+</ul>
